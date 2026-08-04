@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى أغلى ما في حياتي ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color-1: #fff1f3;
+            --bg-color-2: #ffdde1;
+            --accent-color: #e02d4f;
+            --secondary-color: #ff8fa3;
+            --text-color: #7d1c2b;
+            --card-bg: rgba(255, 240, 243, 0.95);
+            --border-color: rgba(255, 143, 163, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-color-1), var(--bg-color-2));
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        /* خلفية القلوب المتحركة */
+        .heart-particle {
+            position: fixed;
+            top: -20px;
+            color: rgba(224, 45, 79, 0.6);
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* الحاويات والشاشات */
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 35px 25px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(224, 45, 79, 0.15);
+            border: 2px solid var(--border-color);
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        h1, h2 {
+            color: var(--accent-color);
+            font-family: 'Reem Kufi', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        /* حقول الإدخال والأزرار */
+        .input-group {
+            margin: 20px 0;
+        }
+
+        input[type="password"] {
+            width: 80%;
+            padding: 12px 20px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 25px;
+            outline: none;
+            font-size: 1rem;
+            text-align: center;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--accent-color);
+        }
+
+        input[type="password"]:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(224, 45, 79, 0.3);
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(224, 45, 79, 0.4);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(224, 45, 79, 0.6);
+        }
+
+        .error-msg {
+            color: #d9534f;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* العداد التنازلي */
+        .timer-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .timer-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 15px;
+            min-width: 75px;
+            box-shadow: 0 4px 10px rgba(224, 45, 79, 0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        .timer-box span {
+            display: block;
+            font-weight: bold;
+        }
+
+        .timer-box .number {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .timer-box .label {
+            font-size: 0.8rem;
+            color: var(--text-color);
+        }
+
+        /* كروت الكلام الحلو */
+        .love-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .love-card {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 18px 20px;
+            border-radius: 18px;
+            border-right: 5px solid var(--accent-color);
+            box-shadow: 0 5px 15px rgba(224, 45, 79, 0.08);
+            text-align: right;
+            transition: transform 0.3s ease;
+        }
+
+        .love-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .love-card p {
+            font-size: 1rem;
+            margin: 0;
+            color: #5c1824;
+            line-height: 1.7;
+        }
+
+        .love-card-title {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الشاشة الأولى: الباسورد الأول (love) -->
+    <div class="container screen active" id="screen1">
+        <h1>أهلاً يا أجمل رغبة ❤️</h1>
+        <p>اكتبي الباسورد علشان تفتحي قلبي</p>
+        <div class="input-group">
+            <input type="password" id="pass1" placeholder="أدخلي كلمة السر...">
+        </div>
+        <button onclick="checkPass1()">دخول 💕</button>
+        <div class="error-msg" id="err1">الباسورد مش صح، فكري تاني يا روحي! 😅</div>
+    </div>
+
+    <!-- الشاشة الثانية: طلب الرسالة + الباسورد الثاني (بحبك) -->
+    <div class="container screen" id="screen2">
+        <h2>حقك عليا متزعليش مني 💕</h2>
+        <p>لو صفيتي ارجعي ابعتيلي علي الواتساب وهديلك الباسورد التاني ✨</p>
+        <div class="input-group">
+            <input type="password" id="pass2" placeholder="أدخلي الباسورد الثاني...">
+        </div>
+        <button onclick="checkPass2()">دخول لقلبي 💖</button>
+        <div class="error-msg" id="err2">الباسورد الثاني مش مظبوط، اسأليني عنه في الواتساب 😉</div>
+    </div>
+
+    <!-- الشاشة الثالثة: المحتوى الرئيسي (العداد + رسايل الحب) -->
+    <div class="container screen" id="screen3">
+        <div class="timer-title">اوعي تضيعي كل دا خليكي معايا ❤️</div>
+        
+        <!-- العداد التنازلي -->
+        <div class="timer-container">
+            <div class="timer-box"><span class="number" id="days">0</span><span class="label">يوم</span></div>
+            <div class="timer-box"><span class="number" id="hours">0</span><span class="label">ساعة</span></div>
+            <div class="timer-box"><span class="number" id="minutes">0</span><span class="label">دقيقة</span></div>
+            <div class="timer-box"><span class="number" id="seconds">0</span><span class="label">ثانية</span></div>
+        </div>
+
+        <!-- كروت الكلام الحلو بالعامية -->
+        <div class="love-cards">
+            <div class="love-card">
+                <div class="love-card-title">✨ أنتِ مش مجرد حد في حياتي</div>
+                <p>أنتِ الحاجة الوحيدة الحلوة اللي بتحلي أي يوم صعيادي، وجودك جنبي هو الأمان والراحة اللي بعيش عليها وكل يوم معاكي بيأكدلي إنك اختيار قلبي الصح.</p>
+            </div>
+
+            <div class="love-card">
+                <div class="love-card-title">🌹 الزعل بيننا بيعدي بس حبك باقي</div>
+                <p>لو زعلتك في يوم غصب عني فحقك على رأسي وقلبي، أنا ماليش غيرك ولا أقدر على زعل عيونك الجمال دول من تاني.. مسامحاني؟</p>
+            </div>
+
+            <div class="love-card">
+                <div class="love-card-title">💍 موعود بيكِ وعايش عشانك</div>
+                <p>من يوم 9/9/2022 وحياتي اتغيرت للأحسن، وكل ثانية بتعدي في العداد فوق بتثبتلي إن الحب الحقيقي مش كلام.. الحب هو أنتِ.</p>
+            </div>
+        </div>
+
+        <p style="font-size: 1rem; color: var(--accent-color); font-weight: bold; margin-top: 15px;">
+            بحبك النهاردة، وبكرة، ولآخر العمر ❤️✨
+        </p>
+    </div>
+
+    <script>
+        // تساقط القلوب
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = ['❤️', '💖', '💕', '💗', '🌸'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        setInterval(createHeart, 300);
+
+        // التحقق من الباسورد الأول
+        function checkPass1() {
+            const val = document.getElementById('pass1').value.trim();
+            if (val === 'love') {
+                document.getElementById('screen1').classList.remove('active');
+                document.getElementById('screen2').classList.add('active');
+            } else {
+                document.getElementById('err1').style.display = 'block';
+            }
+        }
+
+        // التحقق من الباسورد الثاني
+        function checkPass2() {
+            const val = document.getElementById('pass2').value.trim();
+            if (val === 'بحبك') {
+                document.getElementById('screen2').classList.remove('active');
+                document.getElementById('screen3').classList.add('active');
+                startTimer();
+            } else {
+                document.getElementById('err2').style.display = 'block';
+            }
+        }
+
+        // العداد الزمني من تاريخ 9/9/2022
+        function startTimer() {
+            const startDate = new Date('2022-09-09T00:00:00');
+
+            function updateCounter() {
+                const now = new Date();
+                const diff = now - startDate;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / 1000 / 60) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+
+                document.getElementById('days').innerText = days;
+                document.getElementById('hours').innerText = hours;
+                document.getElementById('minutes').innerText = minutes;
+                document.getElementById('seconds').innerText = seconds;
+            }
+
+            updateCounter();
+            setInterval(updateCounter, 1000);
+        }
+    </script>
+</body>
+</html>
